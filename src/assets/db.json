@@ -1,0 +1,135 @@
+{
+  "contenedores": [
+    {
+      "id": "16AVmWqjf88",
+      "contenedorId": "CMAU9864137",
+      "ubicacion": "B2",
+      "fila": "F20",
+      "condicion": "full",
+      "estado": "ubicado",
+      "ingreso": "tren",
+      "salida": "",
+      "fechaIngreso": "2026-06-22",
+      "fechaSalida": ""
+    },
+    {
+      "id": "GtMuCEEyaO8",
+      "contenedorId": "MSCU1234567",
+      "ubicacion": "B1",
+      "fila": "F20",
+      "condicion": "full",
+      "estado": "ubicado",
+      "ingreso": "tren",
+      "salida": "",
+      "fechaIngreso": "2026-06-22",
+      "fechaSalida": ""
+    },
+    {
+      "id": "vXmFskLvsFg",
+      "contenedorId": "TGHU7654321",
+      "ubicacion": "A3",
+      "fila": "F20",
+      "condicion": "full",
+      "estado": "ubicado",
+      "ingreso": "tren",
+      "salida": "",
+      "fechaIngreso": "2026-06-22",
+      "fechaSalida": ""
+    },
+    {
+      "id": "fG6HDK8HAl4",
+      "contenedorId": "APZU4567890",
+      "ubicacion": "a2",
+      "fila": "F19",
+      "condicion": "full",
+      "estado": "ubicado",
+      "ingreso": "tren",
+      "salida": "",
+      "fechaIngreso": "2026-06-22",
+      "fechaSalida": ""
+    },
+    {
+      "id": "xUcZ9y2DRXs",
+      "contenedorId": "OOLU9876543",
+      "ubicacion": "A1",
+      "fila": "F13",
+      "condicion": "full",
+      "estado": "ubicado",
+      "ingreso": "tren",
+      "salida": "",
+      "fechaIngreso": "2026-06-22",
+      "fechaSalida": ""
+    },
+    {
+      "id": "jFqKQCYdTgk",
+      "contenedorId": "SEGU1122334",
+      "ubicacion": "A1",
+      "fila": "F20",
+      "condicion": "full",
+      "estado": "ubicado",
+      "ingreso": "tren",
+      "salida": "",
+      "fechaIngreso": "2026-06-22",
+      "fechaSalida": ""
+    },
+    {
+      "id": "b87r3ctpHCo",
+      "contenedorId": "CMAU1234567",
+      "ubicacion": "a2",
+      "fila": "F17",
+      "condicion": "full",
+      "estado": "ubicado",
+      "ingreso": "tren",
+      "salida": "",
+      "fechaIngreso": "2026-06-22",
+      "fechaSalida": ""
+    },
+    {
+      "id": "to89a6uqjQo",
+      "contenedorId": "CMAU1234567",
+      "ubicacion": "A2",
+      "fila": "F2",
+      "condicion": "full",
+      "estado": "ubicado",
+      "ingreso": "tren",
+      "salida": "",
+      "fechaIngreso": "2026-06-22",
+      "fechaSalida": ""
+    },
+    {
+      "id": "KTOtwwL_TJI",
+      "contenedorId": "JJSU1234567",
+      "ubicacion": "A1",
+      "fila": "F1",
+      "condicion": "full",
+      "estado": "ubicado",
+      "ingreso": "tren",
+      "salida": "",
+      "fechaIngreso": "2026-06-22",
+      "fechaSalida": ""
+    },
+    {
+      "id": "T-Hc3DjacDc",
+      "contenedorId": "AAAU1234567",
+      "ubicacion": "A1",
+      "fila": "F13",
+      "condicion": "full",
+      "estado": "ubicado",
+      "ingreso": "tren",
+      "salida": "",
+      "fechaIngreso": "2026-06-23",
+      "fechaSalida": ""
+    },
+    {
+      "contenedorId": "OOLU9876543",
+      "fila": "F2",
+      "ubicacion": "A2",
+      "ingreso": "tren",
+      "estado": "ubicado",
+      "fechaIngreso": "2026-06-23",
+      "condicion": "full",
+      "id": "urCH3sjEPro"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
