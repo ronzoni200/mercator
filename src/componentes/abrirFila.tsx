@@ -1,98 +1,124 @@
-import { useEffect} from "react";
+import { useEffect, useMemo } from "react";
 import { StateGlobal } from "../hookZustand/useStorega.ts";
-import {useHelper} from "../servicios/helperAbrirFila.ts";
+import { useHelper } from "../servicios/helperAbrirFila.ts";
 import type { Contenedor } from "../type/types.ts";
 
 type Props = {
   fila: string;
 };
 
-
 export default function AbrirFila({ fila }: Props) {
 
-const {obtenerContenedores, formatearFecha} = useHelper();
-
-const {contenedores, setContenedorEditar, setTipoFormulario} = StateGlobal()
+  const { obtenerContenedores } = useHelper();
+  const {contenedores, setContenedorEditar, setTipoFormulario,} = StateGlobal();
 
   useEffect(() => {
-    obtenerContenedores(); // useHelper para obtener los contenedores de la fila seleccionada
+    obtenerContenedores();
   }, [fila]);
-
 
   const botonEditar = (contenedor: Contenedor) => {
     setContenedorEditar(contenedor);
-    setTipoFormulario('camion')
-  }
+    setTipoFormulario("camion");
+  };
 
-  const botonEgreso = (contenedor: Contenedor) => {
-    console.log("Enviando contenedor:", contenedor.id);
+  const columnas = ["H", "G", "F", "E", "D", "C", "B", "A"];
+  const niveles = [3, 2, 1];
+
+  // Mapa para acceder rápidamente por ubicación
+  const mapaUbicaciones = useMemo(() => {
+    const mapa = new Map<string, Contenedor>();
+
+   contenedores.forEach((contenedor) => {
+  if (contenedor.ubicacion) {
+    mapa.set(contenedor.ubicacion, contenedor);
   }
+});
+
+    return mapa;
+  }, [contenedores]);
 
   return (
-  <div className=" mt-10 p-5 flex flex-col items-center">
-    <h2 className="text-2xl font-bold mb-6">
-      Información de {fila}
-    </h2>
+    <div className="mt-8 flex flex-col items-center">
+      <h2 className="text-2xl font-bold mb-8">
+        Fila {fila}
+      </h2>
 
-    <ul className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-      {contenedores.map((contenedor) => (
-        <li
-          key={contenedor.id}
-          className="bg-white shadow-md border rounded-xl p-4 flex flex-col gap-2"
-        >
-          <p className="uppercase break-all text-lg">
-              Contenedor:
-            <strong className="uppercase text-lg">
-            {" "}
-            {contenedor.contenedorId}
-            </strong>
-          </p>
+      <div className="grid grid-cols-9 gap-2">
 
-          <p className="uppercase text-lg">
-              Fecha de Ingreso:
-            <strong className="uppercase">
-            {" "}
-             {formatearFecha(contenedor.fechaIngreso)}
-             </strong>
-          </p>
+        {/* esquina superior izquierda */}
+        <div></div>
 
-          <p className="uppercase text-lg">
-              Ubicacion:
-            <strong className="uppercase">
-            {" "}
-            {contenedor.fila} {contenedor.ubicacion}
-            </strong>
-          </p>
-
-          <p className="uppercase text-lg">
-            Condición:{" "}
-            <strong className="uppercase">{contenedor.condicion}</strong>
-          </p>
-
-          <div className="mt-4 flex flex-col gap-2">
-            <button
-              onClick={() => botonEditar(contenedor)}
-              className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition hover:cursor-pointer"
-            >
-              EDITAR
-            </button>
-
-            <button
-              onClick={() => botonEgreso(contenedor)}
-              className="w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition hover:cursor-pointer"
-            >
-              EGRESO
-            </button>
-
-            <button
-              className="w-full bg-yellow-500 text-white py-2 rounded-lg font-semibold hover:bg-yellow-600 transition hover:cursor-pointer"
-            >
-              MOVIMIENTO
-            </button>
+        {/* encabezados */}
+        {columnas.map((columna) => (
+          <div
+            key={columna}
+            className="text-center font-bold text-lg"
+          >
+            {columna}
           </div>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+        ))}
+
+        {/* filas */}
+        {niveles.map((nivel) => (
+          <>
+            {/* número del nivel */}
+            <div
+              key={`nivel-${nivel}`}
+              className="flex items-center justify-center font-bold text-lg"
+            >
+              {nivel}
+            </div>
+
+            {/* columnas */}
+            {columnas.map((columna) => {
+              const ubicacion = `${columna}${nivel}`;
+
+              const contenedor = mapaUbicaciones.get(ubicacion);
+
+              return (
+                <button
+                  key={ubicacion}
+                  onClick={() => {
+                    if (contenedor) {
+                      botonEditar(contenedor);
+                    } else {
+                      console.log("Ubicación libre:", ubicacion);
+                    }
+                  }}
+                  className={`w-24 h-24 rounded-lg border shadow transition hover:scale-105 cursor-pointer ${contenedor
+                    ? "bg-red-500 hover:bg-red-600 text-white"
+                    : "bg-green-500 hover:bg-green-600 text-white"
+                    }
+                  `}
+                >
+                  <div className="font-bold text-lg">
+                    {ubicacion}
+                  </div>
+
+                  <div className="text-xs mt-2 px-1 break-all">
+                    {contenedor
+                      ? contenedor.contenedorId
+                      : "LIBRE"}
+                  </div>
+                </button>
+              );
+            })}
+          </>
+        ))}
+      </div>
+
+      {/* Leyenda */}
+      <div className="flex gap-8 mt-8">
+        <div className="flex items-center gap-2">
+          <div className="w-5 h-5 bg-green-500 rounded"></div>
+          <span>Libre</span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <div className="w-5 h-5 bg-red-500 rounded"></div>
+          <span>Ocupado</span>
+        </div>
+      </div>
+    </div>
+  );
 }

@@ -1,6 +1,27 @@
 {
   "contenedores": [
-  
+    {
+      "id": "vjci1A87dj8",
+      "contenedorId": "CMAU1234567",
+      "ubicacion": "A1",
+      "fila": "F1",
+      "condicion": "full",
+      "estado": "ubicado",
+      "ingreso": "tren",
+      "salida": "",
+      "fechaIngreso": "2026-06-23",
+      "fechaSalida": ""
+    },
+    {
+      "condicion": "vacio naviera",
+      "contenedorId": "OOLU9876543",
+      "fila": "F2",
+      "ubicacion": "A2",
+      "ingreso": "camion",
+      "estado": "ubicado",
+      "fechaIngreso": "2026-06-23",
+      "id": "WOMrOT80Dl8"
+    }
   ],
   "$schema": "./node_modules/json-server/schema.json"
 }
