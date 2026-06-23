@@ -5,7 +5,7 @@ import IngresoTren from "./ingresoTren.tsx";
 import IngresoFormacion from "./ingresoFormacion.tsx";
 import MostrarPendientes from "./mostrarPendientes.tsx";
 import { useEffect, useState} from "react";
-import {useHelper} from "./helperAbrirFila.ts"
+import {useHelper} from "../servicios/helperAbrirFila.ts"
 
 export default function Home() {
 const {obtenerPendientes} = useHelper()
@@ -32,7 +32,6 @@ const [verFormacion, setVerFormacion] = useState(false)
     
   }, []);
 
-  console.log(formacionPendiente)
 
 
   return (

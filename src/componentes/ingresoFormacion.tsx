@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { StateGlobal } from "../hookZustand/useStorega.ts";
 import type { Contenedor } from "../type/types.ts";
-import {useHelper} from "./helperAbrirFila.ts"
+import {useHelper} from "../servicios/helperAbrirFila.ts"
 
 export default function IngresoFormacion() {
   const [textoIngresado, setTextoIngresado] = useState("");

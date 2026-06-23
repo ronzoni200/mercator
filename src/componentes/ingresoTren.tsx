@@ -4,7 +4,7 @@ import { StateGlobal } from "../hookZustand/useStorega.ts";
 import type { Contenedor } from "../type/types.ts";
 import {useForm}  from "react-hook-form";
 import { useEffect } from "react";
-import { useHelper } from "./helperAbrirFila.ts";
+import { useHelper } from "../servicios/helperAbrirFila.ts";
 
 export default function IngresoTren() {
   const {contenedorEditar, setContenedorEditar, setTipoIngreso, setTipoFormulario} = StateGlobal()

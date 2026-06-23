@@ -1,8 +1,7 @@
 import { useEffect} from "react";
 import { StateGlobal } from "../hookZustand/useStorega.ts";
-import {useHelper} from "../componentes/helperAbrirFila.ts";
+import {useHelper} from "../servicios/helperAbrirFila.ts";
 import type { Contenedor } from "../type/types.ts";
-import dibujarUbicaciones from "./helper/crearMapa&Fila.ts"
 
 type Props = {
   fila: string;
@@ -19,10 +18,6 @@ const {contenedores, setContenedorEditar, setTipoFormulario} = StateGlobal()
     obtenerContenedores(); // useHelper para obtener los contenedores de la fila seleccionada
   }, [fila]);
 
-
-  const mapa = dibujarUbicaciones(contenedores);
-
-  console.log(mapa);
 
   const botonEditar = (contenedor: Contenedor) => {
     setContenedorEditar(contenedor);
