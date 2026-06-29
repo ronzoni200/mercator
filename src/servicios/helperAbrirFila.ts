@@ -145,7 +145,7 @@ const obtenerPendientes = async () => {
   }
 };
 
-const formatearFecha = (fecha: string): string => {
+const formatearFecha = (fecha: string | undefined): string => {
   if (!fecha) return "";
 
   const fechaObj = new Date(fecha);

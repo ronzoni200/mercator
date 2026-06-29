@@ -9,8 +9,8 @@ type StateGlobalType = {
   contenedores: Contenedor[];
   setContenedores: (contenedores: Contenedor[]) => void; // Función para actualizar la lista de contenedores
 
-  tipoFormulario: "camion" | "tren" | "formacion" | null;
-  setTipoFormulario: ( tipo: "camion" | "tren" | "formacion" | null) => void;
+  tipoFormulario: "camion" | "tren" | "formacion" | "infoContenedor" |null;
+  setTipoFormulario: ( tipo: "camion" | "tren" | "formacion" | "infoContenedor" | null) => void;
 
   contenedorEditar: Contenedor | null;
   setContenedorEditar: (contenedor: Contenedor | null) => void; // Función para actualizar el contenedor a editar
@@ -18,16 +18,15 @@ type StateGlobalType = {
   tipoIngreso: string;
   setTipoIngreso: (tipo: string) => void; // Función para actualizar el tipo de ingreso
 
+  verFicha:boolean;
+  setVerFicha: (valor: boolean) => void;
+
   formacionPendiente: Contenedor[]; // Lista de contenedores pendientes de ingreso por formación
 
   setFormacionPendiente: (contenedores: Contenedor[]) => void; // Función para actualizar la lista de contenedores pendientes de ingreso por formación
 
   limpiarFormacionPendiente: () => void; // Función para limpiar la lista de contenedores pendientes de ingreso por formación
 };
-
-
-
-
 
 
 export const StateGlobal = create<StateGlobalType>((set) => ({
@@ -40,6 +39,9 @@ export const StateGlobal = create<StateGlobalType>((set) => ({
 
   tipoFormulario: null,
   setTipoFormulario: (tipo) => set({tipoFormulario: tipo,}),
+
+ verFicha: false,
+ setVerFicha: (valor) =>set({verFicha: valor,}),
 
   contenedorEditar: null,
   setContenedorEditar: (contenedor) => set({ contenedorEditar: contenedor, }), // Función para actualizar el contenedor a editar

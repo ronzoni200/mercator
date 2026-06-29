@@ -6,10 +6,9 @@ import IngresoFormacion from "./ingresoFormacion.tsx";
 import MostrarPendientes from "./mostrarPendientes.tsx";
 import { useEffect, useState } from "react";
 import { useHelper } from "../servicios/helperAbrirFila.ts"
-import VerFila from "./verFila.tsx";
-import BotonesFormularios from "./botonesFila/botonesFormularios.tsx";
-import BotonPendientes from "./botonesFila/botonPendientes.tsx";
-import BotonesFilas from "./botonesFila/botonesFilas.tsx";
+import BotonesFormularios from "./componentesFila/botonesFormularios.tsx";
+import BotonPendientes from "./componentesFila/botonPendientes.tsx";
+import BotonesFilas from "./componentesFila/botonesFilas.tsx";
 
 export default function Home() {
 
@@ -61,10 +60,6 @@ export default function Home() {
       {formacionPendiente.length > 0 && !verFormacion && (
         <MostrarPendientes />
       )}
-
-      
-
-
       
       {filaSeleccionada && (
         <AbrirFila 

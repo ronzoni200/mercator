@@ -28,6 +28,9 @@ const cerrarFormulario = () => {
   setTipoFormulario(null)
 }
 
+const columnas = ["A", "B", "C", "D", "E", "F", "G", "H"];
+const niveles = [1, 2, 3];
+
   return (
         <form 
       noValidate
@@ -160,18 +163,27 @@ const cerrarFormulario = () => {
       </div>
 
       {/* UBICACION */}
-        <div>
-          <label className="block mb-1 font-medium">Ubicación</label>
-          <input
-            type="text"
-            placeholder="A2"
-            className="w-full border p-2 rounded uppercase"
-            {...register("ubicacion", {
-              required: "Este campo es obligatorio",
-              setValueAs: (value) => value?.toUpperCase()
-            })}
-          />
-        </div>
+     
+          <select
+  className="w-full border p-2 rounded uppercase"
+  {...register("ubicacion", {
+    required: "Este campo es obligatorio",
+  })}
+>
+  <option value="">-- Seleccione una ubicación --</option>
+
+  {columnas.flatMap((columna) =>
+    niveles.map((nivel) => (
+      <option
+        key={`${columna}${nivel}`}
+        value={`${columna}${nivel}`}
+      >
+        {columna}
+        {nivel}
+      </option>
+    ))
+  )}
+</select>
 
          <button
           type="submit"
