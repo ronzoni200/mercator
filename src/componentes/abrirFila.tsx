@@ -16,7 +16,6 @@ export default function AbrirFila({ fila }: Props) {
     obtenerContenedores();
   }, [fila]);
 
-  console.log(contenedores)
   return (
     <div className="mt-8 py-5 flex flex-col items-center w-full bg-gray-800">
 

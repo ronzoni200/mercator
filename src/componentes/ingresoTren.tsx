@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useHelper } from "../servicios/helperAbrirFila.ts";
 
 export default function IngresoTren() {
-  const {contenedorEditar, setContenedorEditar, setTipoIngreso, setTipoFormulario} = StateGlobal()
+  const {contenedorEditar, setContenedorEditar, setTipoIngreso, setTipoFormulario, setVerFicha} = StateGlobal()
   const {register, handleSubmit, formState: { errors }, reset } = useForm<Contenedor>();
 
 const {enviarFormulario} = useHelper();
@@ -22,6 +22,7 @@ useEffect(() => {
 }, [contenedorEditar, reset]);
   
 const cerrarFormulario = () => {
+  setVerFicha(false)
   setTipoIngreso("");
   setContenedorEditar(null);
   reset();
