@@ -6,7 +6,7 @@ import {useHelper} from "../servicios/helperAbrirFila.ts"
 export default function IngresoFormacion() {
   const [textoIngresado, setTextoIngresado] = useState("");
   const {importarFormacion} = useHelper()
-  const { formacionPendiente, limpiarFormacionPendiente, setTipoFormulario} = StateGlobal();
+  const { formacionPendiente, setTipoFormulario} = StateGlobal();
 
   useEffect(() => {
     console.log("Formación procesada:", formacionPendiente);
@@ -64,12 +64,7 @@ export default function IngresoFormacion() {
                 Procesar Lista
             </button>
 
-            <button
-                onClick={() => limpiarFormacionPendiente()}
-                className="bg-blue-600 text-white px-4 py-2 rounded"
-            >
-                borrar lista
-            </button>
+
         </div>
 
     </div>

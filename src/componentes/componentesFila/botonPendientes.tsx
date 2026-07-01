@@ -22,8 +22,8 @@ export default function BotonPendientes({ verFormacion, setVerFormacion }: Boton
           onClick={() => setVerFormacion(prev => !prev)}
         >
           {!verFormacion
-            ? "✓ Formación"
-            : "⚠ Formación pendiente"}
+            ? "✓ Formación FULL Ubicaciones"
+            : "⚠ Formación FULL pendiente"}
         </button>
     )
 }

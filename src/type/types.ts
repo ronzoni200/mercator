@@ -16,11 +16,26 @@ export type Contenedor = {
 export type EntradaTren = {
 
 }
+export type Formacion = {
+  id: string;
+  numero: string;
+  fecha: string;
+  estado:
+    | "armando"
+    | "lista"
+    | "despachada";
+  vagones: Vagon[];
+};
 
-export type SalidaTren = {
-    vagon:number
-    contenedor:string
-}
+export type Vagon = {
+  id: string;
+  pc: number;
+ contenedorId?: string;
+  origen?: "playa" | "camion";
+  estado:
+    | "pendiente"
+    | "asignado";
+};
 
 export type Fila= {
   fila: string

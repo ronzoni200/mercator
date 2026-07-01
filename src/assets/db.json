@@ -189,5 +189,49 @@
       "id": "ZoGWiLLXeWo"
     }
   ],
+  "pc": [
+    {
+      "id": "V7eo2uDx9sM",
+      "pc": 7062,
+      "contenedorId": "",
+      "estado": "pendiente"
+    },
+    {
+      "id": "wNJnvO1DkdY",
+      "pc": 7195,
+      "contenedorId": "",
+      "estado": "pendiente"
+    },
+    {
+      "id": "DP4dxaGmXEY",
+      "pc": 7203,
+      "contenedorId": "",
+      "estado": "pendiente"
+    },
+    {
+      "id": "csFNTsV7Ia0",
+      "pc": 7302,
+      "contenedorId": "",
+      "estado": "pendiente"
+    },
+    {
+      "id": "FVbFZ8WQJig",
+      "pc": 609297,
+      "contenedorId": "",
+      "estado": "pendiente"
+    },
+    {
+      "id": "J0MI0w7R_VA",
+      "pc": 544825,
+      "contenedorId": "",
+      "estado": "pendiente"
+    },
+    {
+      "id": "NbZN7UfOOGE",
+      "pc": 610816,
+      "contenedorId": "",
+      "estado": "pendiente"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

@@ -28,7 +28,7 @@ export default function MostrarPendientes() {
   return (
     <div className="max-w-7xl mx-auto p-4 border rounded-2xl mt-8">
       <h1 className="text-3xl font-bold mb-6 text-center underline mt-2 uppercase">
-        formacion Pendiente
+        formacion full Pendiente
       </h1>
 
 
@@ -72,7 +72,7 @@ export default function MostrarPendientes() {
     className="shrink-0 bg-blue-600 text-white px-3 py-1 text-xs rounded"
     onClick={() => agregarUbicacion(contenedor)}
   >
-    Asignar
+    Ubicar
   </button>
 </div>
   ))}
@@ -89,34 +89,4 @@ APZU4567890
 OOLU9876543
 SEGU1122334
 
-
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
-  {pendientesFiltrados.map((contenedor) => (
-    <div
-      key={contenedor.contenedorId}
-      className="bg-white border rounded-lg shadow-sm p-3 flex flex-col gap-2 hover:shadow-md transition"
-    >
-      <div>
-        <p className="text-xs text-gray-500">
-          Contenedor
-        </p>
-
-        <p className="font-semibold text-base uppercase truncate">
-          {contenedor.contenedorId}
-        </p>
-      </div>
-
-      <span className="self-start px-2 py-0.5 rounded text-xs bg-yellow-100 text-yellow-800">
-        Pendiente
-      </span>
-
-      <button
-        className="mt-auto w-full bg-blue-600 text-white py-1.5 text-sm rounded-md hover:bg-blue-700 transition"
-        onClick={() => agregarUbicacion(contenedor)}
-      >
-        Asignar
-      </button>
-    </div>
-  ))}
-</div>
 */

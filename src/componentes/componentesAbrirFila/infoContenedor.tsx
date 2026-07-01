@@ -11,6 +11,8 @@ export default function InfoContenedor(){
     const {formatearFecha} = useHelper()
     const fechaFormato = formatearFecha(contenedorEditar?.fechaIngreso)
 
+    console.log(contenedorEditar)
+
 return (
   <section className=" max-w-md bg-gray-900 border border-blue-500 rounded-xl shadow-lg p-4 my-2">
 

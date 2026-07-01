@@ -1,6 +1,6 @@
 
 import { StateGlobal } from "../hookZustand/useStorega.ts";
-import type { Contenedor } from "../type/types.ts";
+import type { Contenedor, Vagon } from "../type/types.ts";
 import {useForm}  from "react-hook-form";
 
 export const useHelper = () => {
@@ -97,9 +97,7 @@ if (tipoIngreso === "tren") {
   }
 };
 
-const importarFormacion = async (
-  formacion: Contenedor[]
-) => {
+const importarFormacion = async (formacion: Contenedor[]) => {
   try {
     const respuestas = await Promise.all(
       formacion.map(async (contenedor) => {
@@ -156,7 +154,41 @@ const formatearFecha = (fecha: string | undefined): string => {
   });
 };
 
+const PCvacios = async (
+  vagones: Vagon[]
+) => {
+  try {
+    const respuestas = await Promise.all(
+      vagones.map(async (pc) => {
+        const response = await fetch(
+          "http://localhost:3001/pc",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ...pc,
+              id: crypto.randomUUID(),
+            }),
+          }
+        );
 
-    return{obtenerPendientes, importarFormacion,obtenerContenedores, enviarFormulario, formatearFecha}
+        return response.json();
+      })
+    );
+
+    console.log("Formación importada:");
+    console.table(respuestas);
+
+    return respuestas;
+  } catch (error) {
+    console.error("Error al importar la formación:", error);
+  }
+};
+
+
+
+    return{obtenerPendientes, importarFormacion,obtenerContenedores, enviarFormulario, formatearFecha, PCvacios}
 
     }
