@@ -1,5 +1,5 @@
 import Filas from "./componentes/filas"
-import logo from "../public/logo.svg"
+import logo from "/logo.svg";
 
 
 function App() {

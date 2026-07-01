@@ -30,8 +30,7 @@ export type Formacion = {
 export type Vagon = {
   id: string;
   pc: number;
- contenedorId?: string;
-  origen?: "playa" | "camion";
+  contenedorId?: string;
   estado:
     | "pendiente"
     | "asignado";

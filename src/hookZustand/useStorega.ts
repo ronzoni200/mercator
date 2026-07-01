@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { Contenedor } from "../type/types.ts";
+import type { Contenedor, Vagon } from "../type/types.ts";
 
 type StateGlobalType = {
 
@@ -22,10 +22,11 @@ type StateGlobalType = {
   setVerFicha: (valor: boolean) => void;
 
   formacionPendiente: Contenedor[]; // Lista de contenedores pendientes de ingreso por formación
-
   setFormacionPendiente: (contenedores: Contenedor[]) => void; // Función para actualizar la lista de contenedores pendientes de ingreso por formación
-
   limpiarFormacionPendiente: () => void; // Función para limpiar la lista de contenedores pendientes de ingreso por formación
+
+  formacionPCvacios:Vagon[];
+  setFormacionPCvacios:(vagon:Vagon[])=>void;
 };
 
 
@@ -51,10 +52,9 @@ export const StateGlobal = create<StateGlobalType>((set) => ({
 
   formacionPendiente: [], // Lista de contenedores pendientes de ingreso por formación
   setFormacionPendiente: (contenedores: Contenedor[]) => set({ formacionPendiente: contenedores }), // Función para actualizar la lista de contenedores pendientes de ingreso por formación
+  limpiarFormacionPendiente: () => set({formacionPendiente: [] }), // Función para limpiar la lista de contenedores pendientes de ingreso por formación
 
-  limpiarFormacionPendiente: () => set({ 
-    formacionPendiente: []
-    }), // Función para limpiar la lista de contenedores pendientes de ingreso por formación
-
+  formacionPCvacios:[],
+  setFormacionPCvacios:(vagon:Vagon[])=> set({formacionPCvacios: vagon})
 
 }));

@@ -9,6 +9,8 @@ import { useHelper } from "../servicios/helperAbrirFila.ts"
 import BotonesFormularios from "./componentesFila/botonesFormularios.tsx";
 import BotonPendientes from "./componentesFila/botonPendientes.tsx";
 import BotonesFilas from "./componentesFila/botonesFilas.tsx";
+import IngresoPC from "./componenteFormacionVacios/ingresoPC.tsx";
+import MostrarPCpendientes from "./componenteFormacionVacios/mostrarPCpendientes.tsx";
 
 export default function Home() {
 
@@ -48,7 +50,9 @@ export default function Home() {
         />
       </div>
 
-      <BotonesFilas/>        
+      <BotonesFilas/>  
+      <IngresoPC/>      
+      <MostrarPCpendientes/>
 
       {formacionPendiente.length > 0 &&
         <BotonPendientes

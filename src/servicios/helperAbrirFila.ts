@@ -5,11 +5,21 @@ import {useForm}  from "react-hook-form";
 
 export const useHelper = () => {
 
-  const {setContenedores,filaSeleccionada, contenedorEditar, setContenedorEditar, tipoIngreso, setTipoFormulario} = StateGlobal()
+const {setContenedores,filaSeleccionada, contenedorEditar, setContenedorEditar, tipoIngreso, setTipoFormulario, setFormacionPCvacios} = StateGlobal()
 const { reset} = useForm<Contenedor>();
 // Función para obtener los contenedores de la fila seleccionada
  
-
+const obtenerPCvacios = async () => {
+  try{
+    const response = await fetch(
+      `http://localhost:3001/pc`
+    );
+    const data = await response.json();
+    setFormacionPCvacios(data)
+  }catch(error){
+    console.log(error)
+  }
+}
 
 
 const obtenerContenedores = async () => {
@@ -154,9 +164,7 @@ const formatearFecha = (fecha: string | undefined): string => {
   });
 };
 
-const PCvacios = async (
-  vagones: Vagon[]
-) => {
+const PCvacios = async (vagones: Vagon[]) => {
   try {
     const respuestas = await Promise.all(
       vagones.map(async (pc) => {
@@ -173,7 +181,6 @@ const PCvacios = async (
             }),
           }
         );
-
         return response.json();
       })
     );
@@ -189,6 +196,6 @@ const PCvacios = async (
 
 
 
-    return{obtenerPendientes, importarFormacion,obtenerContenedores, enviarFormulario, formatearFecha, PCvacios}
+    return{obtenerPendientes, importarFormacion,obtenerContenedores, enviarFormulario, formatearFecha, PCvacios, obtenerPCvacios}
 
     }
