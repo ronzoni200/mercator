@@ -1,7 +1,6 @@
 import AbrirFila from "./abrirFila"
 import { StateGlobal } from "../hookZustand/useStorega.ts";
 import FormularioIngresoCamion from "./ingresoCamion.tsx";
-import IngresoTren from "./ingresoTren.tsx";
 import IngresoFormacion from "./ingresoFormacion.tsx";
 import MostrarPendientes from "./mostrarPendientes.tsx";
 import { useEffect, useState } from "react";
@@ -11,48 +10,74 @@ import BotonPendientes from "./componentesFila/botonPendientes.tsx";
 import BotonesFilas from "./componentesFila/botonesFilas.tsx";
 import IngresoPC from "./componenteFormacionVacios/ingresoPC.tsx";
 import MostrarPCpendientes from "./componenteFormacionVacios/mostrarPCpendientes.tsx";
+import IngresoTren from "../componentes/ingresoTren.tsx";
+import BotonPCvacios from "./componentesFila/botonPCvacios.tsx";
+
 
 export default function Home() {
 
-  const { obtenerPendientes } = useHelper()
+  const { obtenerPendientes, obtenerPCvacios, obtenerContenedoresTodos } = useHelper()
   const [verFormacion, setVerFormacion] = useState(false)
-  const { filaSeleccionada, formacionPendiente, tipoFormulario, setFormacionPendiente } = StateGlobal()
+  const [verFormacionVacios, setVerFormacionVacios] = useState(false)
+  const { filaSeleccionada, formacionPendiente, tipoFormulario, setFormacionPendiente, formacionPCvacios } = StateGlobal()
 
 
   const cargarPendientes = async () => {
     const pendientes = await obtenerPendientes();
     setFormacionPendiente(pendientes)
   };
+
+   const hayPendientes =()=>{3
+    return formacionPCvacios.some(v => v.estado === "pendiente");
+  }
  
   useEffect(() => {
     cargarPendientes();
+    obtenerPCvacios()
+    obtenerContenedoresTodos()
   }, []);
-
 
 
   return (
     <div className=" w-full p-5 ">
 
       <div className="flex justify-around items-center mb-10">
+
         <BotonesFormularios
-          tipoformulario="tren"
-          nombreBoton = "ingreso tren"
+          tipoformulario="formacionVacios"
+          nombreBoton = "formacion vacios"
         />
 
         <BotonesFormularios
-          tipoformulario="formacion"
-          nombreBoton = "Ingreso formacion"
+          tipoformulario="formacionFull"
+          nombreBoton = "formacion Full"
         />
+
+        
 
         <BotonesFormularios
           tipoformulario="camion"
           nombreBoton = "Ingreso por camion"
         />
+
+        
       </div>
 
+
       <BotonesFilas/>  
-      <IngresoPC/>      
-      <MostrarPCpendientes/>
+      <div className="flex flex-col mt-4">
+
+      {formacionPCvacios.length > 0 && 
+      <BotonPCvacios 
+        verFormacionVacios={verFormacionVacios}
+        setVerFormacionVacios={setVerFormacionVacios}
+      />}
+
+      {formacionPCvacios.length > 0 &&
+       !verFormacionVacios &&
+       hayPendientes() &&
+        <MostrarPCpendientes/>}   
+      
 
       {formacionPendiente.length > 0 &&
         <BotonPendientes
@@ -70,6 +95,7 @@ export default function Home() {
         fila={filaSeleccionada} 
         />
       )}
+      </div>
 
 
 
@@ -81,18 +107,26 @@ export default function Home() {
         </div>
       )}
 
-      {tipoFormulario === "tren" && (
+      {tipoFormulario === "formacionFull" && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-5 rounded w-96">
-            <IngresoTren />
+            <IngresoFormacion />
           </div>
         </div>
       )}
 
-      {tipoFormulario === "formacion" && (
+      {tipoFormulario === "formacionVacios" && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-5 rounded w-96">
-            <IngresoFormacion />
+            <IngresoPC/>
+          </div>
+        </div>
+      )}
+
+      {tipoFormulario === "tren" && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-5 rounded w-96">
+            <IngresoTren/>
           </div>
         </div>
       )}

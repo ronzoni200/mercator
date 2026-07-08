@@ -11,6 +11,7 @@ export type Contenedor = {
   // Fechas
   fechaIngreso: string;
   fechaSalida?: string;
+  pc?:number|undefined;
 };
 
 export type EntradaTren = {

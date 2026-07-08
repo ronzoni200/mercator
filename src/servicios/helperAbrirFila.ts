@@ -5,7 +5,7 @@ import {useForm}  from "react-hook-form";
 
 export const useHelper = () => {
 
-const {setContenedores,filaSeleccionada, contenedorEditar, setContenedorEditar, tipoIngreso, setTipoFormulario, setFormacionPCvacios} = StateGlobal()
+const {setContenedores,filaSeleccionada, contenedorEditar, setContenedorEditar, tipoIngreso, setTipoFormulario, setFormacionPCvacios, setContenedoresTodos} = StateGlobal()
 const { reset} = useForm<Contenedor>();
 // Función para obtener los contenedores de la fila seleccionada
  
@@ -21,9 +21,17 @@ const obtenerPCvacios = async () => {
   }
 }
 
+const obtenerContenedoresTodos = async () => {
+  try {
+    const response = await fetch(`http://localhost:3001/contenedores`);
+    const data = await response.json();
+    setContenedoresTodos(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const obtenerContenedores = async () => {
-
 
       try {
         const response = await fetch(
@@ -36,12 +44,9 @@ const obtenerContenedores = async () => {
       }
     };
 
-
-    // funcion que edita o crea un contenedor
  const enviarFormulario = async (data: Contenedor) => {
 
   try {
-
     let response;
 
     if (contenedorEditar?.id !== undefined) {
@@ -194,8 +199,117 @@ const PCvacios = async (vagones: Vagon[]) => {
   }
 };
 
+const actualizarContenedor = async (contenedor: Contenedor) => {
+  if (!contenedor.id) {
+    throw new Error("El contenedor no tiene id.");
+  }
+
+  try {
+    const response = await fetch(
+      `http://localhost:3001/contenedores/${contenedor.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(contenedor),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Error al actualizar el contenedor.");
+    }
+
+    const resultado = await response.json();
+
+    console.log("Contenedor actualizado:");
+    console.table(resultado);
+
+    return resultado;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+const actualizarPC = async (pc: Vagon) => {
+  if (!pc.contenedorId) {
+    throw new Error("El PC no tiene contenedor asignado.");
+  }
+
+  try {
+    const response = await fetch(
+      `http://localhost:3001/pc/${pc.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pc),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Error al actualizar el PC.");
+    }
+
+    const resultado = await response.json();
+
+    console.log("PC actualizado:");
+    console.table(resultado);
+
+    return resultado;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+const asignarDesdePlaya = async ( contenedor: Contenedor, pc: Vagon) => {
+    
+  const fechaFormateada = formatearFecha(contenedor.fechaIngreso);
+
+  const contenedorActualizado: Contenedor = {
+    ...contenedor,
+    estado: "egresado",
+    fechaSalida: fechaFormateada,
+    salida: "tren",
+    pc: pc.pc,          // <-- usar el parámetro
+    fila: "",
+    ubicacion: "",
+  };
+
+  const pcActualizado: Vagon = {
+    ...pc,
+    estado: "asignado",
+    contenedorId: contenedor.contenedorId,
+  };
+
+  await actualizarContenedor(contenedorActualizado);
+  await actualizarPC(pcActualizado);
+
+  return {
+    contenedor: contenedorActualizado,
+    pc: pcActualizado,
+  };
+};
+
+const asignarDesdeCamion = async (pcSeleccionado: Vagon, contenedorCamion: string) => {
+
+    if (!pcSeleccionado) return;
+    console.log(pcSeleccionado.pc);
+    console.log(contenedorCamion);
+
+    const pcActualizado: Vagon = {
+    ...pcSeleccionado,
+    estado: "asignado",
+    contenedorId: contenedorCamion,
+  };
+    
+    await actualizarPC(pcActualizado);
+  };
 
 
-    return{obtenerPendientes, importarFormacion,obtenerContenedores, enviarFormulario, formatearFecha, PCvacios, obtenerPCvacios}
+return {asignarDesdePlaya, asignarDesdeCamion, actualizarPC, actualizarContenedor, obtenerPendientes, importarFormacion, obtenerContenedores, enviarFormulario, formatearFecha, PCvacios, obtenerPCvacios, obtenerContenedoresTodos }
 
     }

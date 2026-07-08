@@ -23,18 +23,18 @@ export default function MostrarPendientes() {
 
 
   return (
-    <div className="max-w-7xl mx-auto p-4 border rounded-2xl mt-8">
+    <div className="w-full mx-auto mb-5 p-4 border rounded-2xl mt-8">
       <h1 className="text-3xl font-bold mb-6 text-center underline mt-2 uppercase">
         formacion full Pendiente
       </h1>
 
 
-      <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-around gap-4">
         <p className="text-2xl font-semibold text-red-600">
           Total: <span>{formacionPendiente.length}</span>
         </p>
 
-        <div className="flex items-center gap-2">
+        <div className="flex justify-around">
           <input
             type="text"
             placeholder="🔍 Buscar contenedor..."

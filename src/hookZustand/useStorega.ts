@@ -9,8 +9,11 @@ type StateGlobalType = {
   contenedores: Contenedor[];
   setContenedores: (contenedores: Contenedor[]) => void; // Función para actualizar la lista de contenedores
 
-  tipoFormulario: "camion" | "tren" | "formacion" | "infoContenedor" |null;
-  setTipoFormulario: ( tipo: "camion" | "tren" | "formacion" | "infoContenedor" | null) => void;
+  contenedoresTodos: Contenedor[];
+  setContenedoresTodos: (contenedores: Contenedor[]) => void;
+
+  tipoFormulario: "camion" | "tren" | "formacionFull" | "formacionVacios" | "infoContenedor" |null;
+  setTipoFormulario: ( tipo: "camion" | "tren" | "formacionFull" | "formacionVacios" | "infoContenedor" | null) => void;
 
   contenedorEditar: Contenedor | null;
   setContenedorEditar: (contenedor: Contenedor | null) => void; // Función para actualizar el contenedor a editar
@@ -27,6 +30,9 @@ type StateGlobalType = {
 
   formacionPCvacios:Vagon[];
   setFormacionPCvacios:(vagon:Vagon[])=>void;
+
+  pcSeleccionado: Vagon | undefined;
+  setPCseleccionado: (pc: Vagon | undefined) => void;
 };
 
 
@@ -37,6 +43,9 @@ export const StateGlobal = create<StateGlobalType>((set) => ({
 
   contenedores: [], 
   setContenedores: (contenedores) => set({ contenedores,}), // Función para actualizar la lista de contenedores
+
+  contenedoresTodos: [],
+  setContenedoresTodos: (contenedores) => set({ contenedoresTodos: contenedores,}), // Función para actualizar la lista de todos los contenedores
 
   tipoFormulario: null,
   setTipoFormulario: (tipo) => set({tipoFormulario: tipo,}),
@@ -55,6 +64,9 @@ export const StateGlobal = create<StateGlobalType>((set) => ({
   limpiarFormacionPendiente: () => set({formacionPendiente: [] }), // Función para limpiar la lista de contenedores pendientes de ingreso por formación
 
   formacionPCvacios:[],
-  setFormacionPCvacios:(vagon:Vagon[])=> set({formacionPCvacios: vagon})
+  setFormacionPCvacios:(vagon:Vagon[])=> set({formacionPCvacios: vagon}),
+
+  pcSeleccionado: undefined,
+  setPCseleccionado: (pc) => set({ pcSeleccionado: pc, }),
 
 }));

@@ -1,7 +1,7 @@
 import { StateGlobal } from "../../hookZustand/useStorega"
 
 type BotonesFormulariosProp = {
-    tipoformulario:"camion" | "tren" | "formacion" | null;
+    tipoformulario:"camion" |"formacionFull"| "formacionVacios"| null;
     nombreBoton: string
 }
 

@@ -34,11 +34,11 @@ export default function IngresoPC(){
         };
     return(
     <div className="max-w-xl mx-auto p-4">
-        <h1 className="text-2xl font-bold mb-4">
-            PC vacios
+        <h1 className="text-2xl font-bold mb-4 uppercase">
+           ingreso de PC vacios
             <button
             className="bg-red-600 text-white py-1 px-1 rounded hover:cursor-pointer font-bold uppercase ml-4"
-           // onClick={() => setTipoFormulario(null)}
+            onClick={() => setTipoFormulario(null)}
             >
             X
             </button>
@@ -57,7 +57,7 @@ export default function IngresoPC(){
                 className="bg-blue-600 text-white px-4 py-2 rounded"
                 type="button"
             >
-                Procesar vagones
+                Ingresar vagones
             </button>
         </div>
     </div>
