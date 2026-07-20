@@ -6,7 +6,7 @@ import BotonSalida from "./botonesInfoContenedores/btnSalida";
 
 
 export default function InfoContenedor(){
-    
+
     const { contenedorEditar } =StateGlobal()
     const {formatearFecha} = useHelper()
     const fechaFormato = formatearFecha(contenedorEditar?.fechaIngreso)
@@ -16,16 +16,16 @@ export default function InfoContenedor(){
 return (
   <section className=" max-w-md bg-gray-900 border border-blue-500 rounded-xl shadow-lg p-4 my-2">
 
-<div className="flex items-center justify-between border-b border-gray-700 pb-2 mb-4">
-  {/* Espacio para mantener el título centrado */}
-  <div className="w-24" />
+    <div className="flex items-center justify-between border-b border-gray-700 pb-2 mb-4">
+      {/* Espacio para mantener el título centrado */}
+      <div className="w-24" />
 
-  <h3 className="flex-1 text-center text-3xl font-bold text-yellow-200 uppercase">
-    {contenedorEditar?.contenedorId}
-  </h3>
+      <h3 className="flex-1 text-center text-3xl font-bold text-yellow-200 uppercase">
+        {contenedorEditar?.contenedorId}
+      </h3>
 
-  <BotonCerrar />
-</div>
+      <BotonCerrar />
+    </div>
 
     <div className="space-y-2 text-gray-200 text-2xl">
       <p className="font-semibold uppercase  text-yellow-400">

@@ -4,17 +4,18 @@ import MatrizAbrirFila from "./componentesAbrirFila/matriz.tsx";
 import InfoContenedor from "./componentesAbrirFila/infoContenedor.tsx";
 import { StateGlobal } from "../hookZustand/useStorega.ts";
 import TituloMatriz from "./componentesAbrirFila/tituloMatriz.tsx";
+
 type Props = {
   fila: string;
 };
 
 export default function AbrirFila({ fila }: Props) {
   const { obtenerContenedores } = useHelper();
-  const {verFicha, contenedores} = StateGlobal()
+  const {verFicha, contenedorEditar} = StateGlobal()
 
   useEffect(() => {
     obtenerContenedores();
-  }, [fila]);
+  }, [fila, contenedorEditar]);
 
   return (
     <div className="mt-8 py-5 flex flex-col items-center w-full bg-gray-800">

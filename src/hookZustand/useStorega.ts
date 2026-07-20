@@ -18,8 +18,8 @@ type StateGlobalType = {
   contenedorEditar: Contenedor | null;
   setContenedorEditar: (contenedor: Contenedor | null) => void; // Función para actualizar el contenedor a editar
 
-  tipoIngreso: string;
-  setTipoIngreso: (tipo: string) => void; // Función para actualizar el tipo de ingreso
+  tipoIngreso: "" | "camion" | "tren";
+  setTipoIngreso: (tipo: "" | "camion" | "tren") => void; // Función para actualizar el tipo de ingreso
 
   verFicha:boolean;
   setVerFicha: (valor: boolean) => void;

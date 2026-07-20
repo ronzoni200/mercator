@@ -33,14 +33,14 @@ export default function FiltrarPC(){
         <div className="mt-4 space-y-2 overflow-auto">
           {pcsFiltrados.map((pc) => (
               <button
-                key={pc.id}
+                key={pc.pc}
                 onClick={() => setPCseleccionado(pc)}
                 className={`w-full border rounded-lg p-3 transition-all duration-200 flex justify-between items-center
                     ${pc.estado === "pendiente"
                     ? "bg-yellow-50 border-yellow-400 hover:bg-yellow-100"
                     : "bg-green-50 border-green-500 hover:bg-green-100"
                   }
-                    ${pcSeleccionado?.id === pc.id
+                    ${pcSeleccionado?.pc === pc.pc
                     ? "ring-2 ring-blue-500"
                     : ""
                   }

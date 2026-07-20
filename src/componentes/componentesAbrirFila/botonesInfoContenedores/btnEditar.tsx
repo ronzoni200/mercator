@@ -1,11 +1,12 @@
 import { StateGlobal } from "../../../hookZustand/useStorega"
-
 export default function BotonEditar(){
     const {setTipoFormulario} = StateGlobal()
-    
+
     const ejecutarEdicion=()=>{
         setTipoFormulario("tren")
+        
     }
+    
     return(
         <button 
         type="button"

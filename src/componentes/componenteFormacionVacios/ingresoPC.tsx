@@ -1,6 +1,6 @@
 
 
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { StateGlobal } from "../../hookZustand/useStorega";
 import type { Vagon } from "../../type/types";
 import { useHelper } from "../../servicios/helperAbrirFila";
@@ -9,7 +9,7 @@ export default function IngresoPC(){
 
 
   const [textoIngresado, setTextoIngresado] = useState("");
-  const {PCvacios} = useHelper()
+  const {PCvacios, refrescarDatos} = useHelper()
   const {setTipoFormulario, setFormacionPCvacios, formacionPCvacios} = StateGlobal();
 
 
@@ -31,7 +31,10 @@ export default function IngresoPC(){
            PCvacios(formacionProcesados);
            setTextoIngresado("");
            console.log("formacionPCvacios", formacionPCvacios);
+           refrescarDatos()
         };
+
+        
     return(
     <div className="max-w-xl mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4 uppercase">

@@ -55,7 +55,7 @@ export default function MatrizAbrirFila() {
                       ? "bg-red-500 hover:bg-red-600 text-black font-bold"
                       : "bg-green-500 hover:bg-green-600 text-white"
                      }  `}
-            >
+              >
                 <div className="font-bold text-xs md:text-sm lg:text-lg">
                   {ubicacion}
                 </div>

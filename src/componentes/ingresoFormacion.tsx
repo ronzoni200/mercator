@@ -22,7 +22,6 @@ export default function IngresoFormacion() {
       const contenedoresProcesados: Contenedor[] =
 
         listaProcesada.map((contenedorId) => ({
-            id: undefined, // El ID se asignará automáticamente por json-server
             contenedorId: contenedorId,
             ubicacion: "", // La ubicación se asignará posteriormente
             fila: "", // La fila se asignará posteriormente

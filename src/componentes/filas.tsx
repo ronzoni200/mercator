@@ -16,26 +16,16 @@ import BotonPCvacios from "./componentesFila/botonPCvacios.tsx";
 
 export default function Home() {
 
-  const { obtenerPendientes, obtenerPCvacios, obtenerContenedoresTodos } = useHelper()
+  const { refrescarDatos } = useHelper()
   const [verFormacion, setVerFormacion] = useState(false)
   const [verFormacionVacios, setVerFormacionVacios] = useState(false)
-  const { filaSeleccionada, formacionPendiente, tipoFormulario, setFormacionPendiente, formacionPCvacios } = StateGlobal()
+  const { filaSeleccionada, formacionPendiente, tipoFormulario, formacionPCvacios, contenedores} = StateGlobal()
 
-
-  const cargarPendientes = async () => {
-    const pendientes = await obtenerPendientes();
-    setFormacionPendiente(pendientes)
-  };
-
-   const hayPendientes =()=>{3
-    return formacionPCvacios.some(v => v.estado === "pendiente");
-  }
+ 
  
   useEffect(() => {
-    cargarPendientes();
-    obtenerPCvacios()
-    obtenerContenedoresTodos()
-  }, []);
+  refrescarDatos()
+  }, [contenedores]);
 
 
   return (
@@ -75,7 +65,6 @@ export default function Home() {
 
       {formacionPCvacios.length > 0 &&
        !verFormacionVacios &&
-       hayPendientes() &&
         <MostrarPCpendientes/>}   
       
 

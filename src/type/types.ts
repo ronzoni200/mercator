@@ -1,6 +1,5 @@
 export type Contenedor = {
   
-  id?: string;// Identificador interno  
   contenedorId: string;// Número de contenedor 
   fila?: string;  // Ubicación en el patio
   ubicacion?: string;
@@ -29,7 +28,6 @@ export type Formacion = {
 };
 
 export type Vagon = {
-  id: string;
   pc: number;
   contenedorId?: string;
   estado:
