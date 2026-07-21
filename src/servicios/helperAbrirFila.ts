@@ -6,7 +6,7 @@ import { collection, query, where, getDocs, updateDoc, doc, setDoc, deleteDoc } 
 import { db } from "../firebase/config"; // ajustá la ruta
 export const useHelper = () => {
 
-const {setContenedores,filaSeleccionada, contenedorEditar, setContenedorEditar, tipoIngreso, setTipoFormulario, setFormacionPCvacios, setContenedoresTodos, setFormacionPendiente, setVerFicha, pcSeleccionado, numeroDePc} = StateGlobal()
+const {setContenedores,filaSeleccionada, contenedorEditar, setContenedorEditar, tipoIngreso, setTipoFormulario, setFormacionPCvacios, setContenedoresTodos, setFormacionPendiente, setVerFicha, numeroDePc} = StateGlobal()
 const { reset} = useForm<Contenedor>();
 // Función para obtener los contenedores de la fila seleccionada
 
@@ -256,34 +256,78 @@ const actualizarPC = async (pc: Vagon) => {
   }
 };
 
-const asignarDesdePlaya = async ( contenedor: Contenedor, pc: Vagon) => {
+const eliminarUnContenedor = async (conte:string ) =>{
+    await deleteDoc(doc(db, "contenedores", conte));
 
-  const fechaFormateada = formatearFecha(contenedor.fechaIngreso);
+    setTimeout(async () => {
+    try {
+        setVerFicha(false)
+        refrescarDatos()
+        await obtenerContenedores();
+    } catch (error) {
+        console.error("Error al eliminar el contenedor:", error);
+    }
+}, 1000);
 
-  const contenedorActualizado: Contenedor = {
-    ...contenedor,
-    estado: "egresado",
-    fechaSalida: fechaFormateada,
-    salida: "tren",
-    pc: pc.pc,
-    fila: contenedor.fila,
-    ubicacion: contenedor.ubicacion,
-  };
+}
+
+const eliminarContenedoresFila = async () => {
+  try {
+    const q = query(
+      collection(db, "contenedores"),
+      where("fila", "==", filaSeleccionada)
+    );
+
+    const querySnapshot = await getDocs(q);
+
+    await Promise.all(
+      querySnapshot.docs.map((documento) =>
+        deleteDoc(doc(db, "contenedores", documento.id))
+      )
+    );
+
+    console.log(`Fila ${filaSeleccionada} eliminada correctamente.`);
+
+    await obtenerContenedores();
+    refrescarDatos();
+
+  } catch (error) {
+    console.error("Error al eliminar la fila:", error);
+  }
+};
+const asignarDesdePlaya = async (
+  contenedor: Contenedor,
+  pc: Vagon
+) => {
 
   const pcActualizado: Vagon = {
-    ...pc,
-    estado: "asignado",
-    contenedorId: contenedor.contenedorId,
-  };
+  ...pc,
+  estado: "asignado",
+  contenedorId: contenedor.contenedorId,
+};
 
-  await actualizarContenedor(contenedorActualizado);
-  await actualizarPC(pcActualizado);
-  obtenerContenedores();
-  setVerFicha(false);
-  return {
-    contenedor: contenedorActualizado,
-    pc: pcActualizado,
-  };
+// Eliminar el contenedor de playa
+
+// Actualizar el vagón
+await actualizarPC(pcActualizado);
+
+
+setVerFicha(false);
+
+setTimeout(async () => {
+    try {
+        await deleteDoc(doc(db, "contenedores", contenedor.contenedorId));
+        console.log("Contenedor eliminado con éxito");
+        refrescarDatos()
+        await obtenerContenedores();
+    } catch (error) {
+        console.error("Error al eliminar el contenedor:", error);
+    }
+}, 1000);
+
+return {
+  pc: pcActualizado,
+};
 };
 
 const asignarDesdeCamion = async (
@@ -310,8 +354,7 @@ try {
     const contenedorReubicado: Contenedor = {
       ...data,
       estado: "ubicado",
-      salida: "",
-      fechaSalida: ""
+      salida: ""
     };
 
     await setDoc(
@@ -341,6 +384,11 @@ try {
 
     console.log("Contenedor reubicado correctamente.");
     setTipoFormulario(null)
+
+        setTimeout(async() => {
+          await obtenerContenedores();
+          refrescarDatos()    
+        }, 500);
     return {
       contenedor: contenedorReubicado,
       pc: pcLiberado,
@@ -367,6 +415,11 @@ const modificarConte = async (data: FormModificarContenedor) => {
 
     setTipoFormulario(null);
 
+    setTimeout(async() => {
+      await obtenerContenedores();
+      refrescarDatos()    
+}, 500);
+
   } catch (error) {
     console.error("Error al modificar el contenedor:", error);
     throw error;
@@ -374,7 +427,7 @@ const modificarConte = async (data: FormModificarContenedor) => {
 };
 
 
-return {modificarConte, reubicarContenedorDelPC, refrescarDatos, limpiarPC, asignarDesdePlaya, asignarDesdeCamion, actualizarPC, actualizarContenedor, obtenerPendientes, importarFormacion, obtenerContenedores, enviarFormulario, formatearFecha, PCvacios, obtenerPCvacios, obtenerContenedoresTodos }
+return {eliminarContenedoresFila, eliminarUnContenedor, modificarConte, reubicarContenedorDelPC, refrescarDatos, limpiarPC, asignarDesdePlaya, asignarDesdeCamion, actualizarPC, actualizarContenedor, obtenerPendientes, importarFormacion, obtenerContenedores, enviarFormulario, formatearFecha, PCvacios, obtenerPCvacios, obtenerContenedoresTodos }
 
     }
 

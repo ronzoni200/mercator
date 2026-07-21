@@ -7,7 +7,7 @@ import { useHelper } from "../../servicios/helperAbrirFila.ts";
 
 export default function ReubiarContenedor() {
 
-const {contenedorEditar, setContenedorEditar, setTipoIngreso, setTipoFormulario, numeroDeContenedor, pcSeleccionado} = StateGlobal()        
+const {contenedorEditar, setContenedorEditar, setTipoIngreso, setTipoFormulario, numeroDeContenedor} = StateGlobal()        
 const {register, handleSubmit, formState:{errors}, reset, setValue} = useForm<Contenedor>();
 const {reubicarContenedorDelPC} = useHelper();
 
@@ -17,7 +17,6 @@ useEffect(() => {
     console.log(numeroDeContenedor);
 }, [numeroDeContenedor, setValue]);
 
-console.log(pcSeleccionado );
 const cerrarFormulario = () => {
   setTipoIngreso("");
   setContenedorEditar(null);

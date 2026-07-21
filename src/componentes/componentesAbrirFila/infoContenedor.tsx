@@ -7,11 +7,12 @@ import BotonSalida from "./botonesInfoContenedores/btnSalida";
 
 export default function InfoContenedor(){
 
-    const { contenedorEditar } =StateGlobal()
+    const { contenedorEditar} =StateGlobal()
     const {formatearFecha} = useHelper()
     const fechaFormato = formatearFecha(contenedorEditar?.fechaIngreso)
 
     console.log(contenedorEditar)
+
 
 return (
   <section className=" max-w-md bg-gray-900 border border-blue-500 rounded-xl shadow-lg p-4 my-2">
@@ -57,10 +58,10 @@ return (
       </p>
 
       <div className=" flex justify-around">
-        <BotonEditar/> <BotonSalida/>
+        <BotonEditar/> <BotonSalida contenedorID={contenedorEditar?.contenedorId}/>
       </div>
     </div>
   </section>
 );
 }
-
+// <BotonSalida contenedorID={contenedorEditar?.contenedorId}/>

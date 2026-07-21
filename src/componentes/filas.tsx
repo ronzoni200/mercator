@@ -29,7 +29,7 @@ export default function Home() {
   refrescarDatos()
   }, [contenedores]);
 
-
+console.log("fila")
   return (
     <div className=" w-full p-5 ">
 
