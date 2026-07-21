@@ -6,7 +6,7 @@ import { collection, query, where, getDocs, updateDoc, doc, setDoc, deleteDoc } 
 import { db } from "../firebase/config"; // ajustá la ruta
 export const useHelper = () => {
 
-const {setContenedores,filaSeleccionada, contenedorEditar, setContenedorEditar, tipoIngreso, setTipoFormulario, setFormacionPCvacios, setContenedoresTodos, setFormacionPendiente, setVerFicha} = StateGlobal()
+const {setContenedores,filaSeleccionada, contenedorEditar, setContenedorEditar, tipoIngreso, setTipoFormulario, setFormacionPCvacios, setContenedoresTodos, setFormacionPendiente, setVerFicha, pcSeleccionado, numeroDePc} = StateGlobal()
 const { reset} = useForm<Contenedor>();
 // Función para obtener los contenedores de la fila seleccionada
 
@@ -73,7 +73,6 @@ const obtenerContenedoresTodos = async () => {
     console.error(error);
   }};
 
-
 // funcion traspasada para obtener los contenedores de la fila seleccionada
     const obtenerContenedores = async () => {
   try {
@@ -95,8 +94,6 @@ const obtenerContenedoresTodos = async () => {
     console.error(error);
   }
 };
-
-
 
 const actualizarContenedor = async (contenedor: Contenedor) => {
   if (!contenedor.contenedorId) {
@@ -306,7 +303,78 @@ const asignarDesdeCamion = async (
 };
 
 
-return {refrescarDatos, limpiarPC, asignarDesdePlaya, asignarDesdeCamion, actualizarPC, actualizarContenedor, obtenerPendientes, importarFormacion, obtenerContenedores, enviarFormulario, formatearFecha, PCvacios, obtenerPCvacios, obtenerContenedoresTodos }
+const reubicarContenedorDelPC = async (data: Contenedor) => {
+
+try {
+    // Volver a guardar el contenedor en playa
+    const contenedorReubicado: Contenedor = {
+      ...data,
+      estado: "ubicado",
+      salida: "",
+      fechaSalida: ""
+    };
+
+    await setDoc(
+      doc(db, "contenedores", data.contenedorId),
+      contenedorReubicado
+    );
+
+    // Eliminarlo del egreso
+    await deleteDoc(
+      doc(db, "egresoFormacion", String(numeroDePc))
+    );
+
+    console.log("PC seleccionado", numeroDePc);
+    console.log("Documento que voy a actualizar:", String(numeroDePc));
+
+    // Liberar el vagón
+    const pcLiberado = {
+      pc: numeroDePc,
+      estado: "pendiente",
+      contenedorId: "",
+    };
+
+    await setDoc(
+      doc(db, "egresoFormacion", String(numeroDePc)),
+      pcLiberado
+    );
+
+    console.log("Contenedor reubicado correctamente.");
+    setTipoFormulario(null)
+    return {
+      contenedor: contenedorReubicado,
+      pc: pcLiberado,
+    };
+
+  } catch (error) {
+    console.error("Error al reubicar el contenedor:", error);
+    throw error;
+  }
+};
+
+type FormModificarContenedor = {
+  contenedorId: string;
+};
+
+const modificarConte = async (data: FormModificarContenedor) => {
+  try {
+    await updateDoc(
+      doc(db, "egresoFormacion", String(numeroDePc)),
+      {
+        contenedorId: data.contenedorId,
+      }
+    );
+
+    setTipoFormulario(null);
+
+  } catch (error) {
+    console.error("Error al modificar el contenedor:", error);
+    throw error;
+  }
+};
+
+
+return {modificarConte, reubicarContenedorDelPC, refrescarDatos, limpiarPC, asignarDesdePlaya, asignarDesdeCamion, actualizarPC, actualizarContenedor, obtenerPendientes, importarFormacion, obtenerContenedores, enviarFormulario, formatearFecha, PCvacios, obtenerPCvacios, obtenerContenedoresTodos }
 
     }
 

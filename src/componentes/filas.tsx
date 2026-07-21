@@ -12,6 +12,8 @@ import IngresoPC from "./componenteFormacionVacios/ingresoPC.tsx";
 import MostrarPCpendientes from "./componenteFormacionVacios/mostrarPCpendientes.tsx";
 import IngresoTren from "../componentes/ingresoTren.tsx";
 import BotonPCvacios from "./componentesFila/botonPCvacios.tsx";
+import ReubiarContenedor from "./componenteFormacionVacios/reubicarContenedor.tsx";
+import ModificarContenedor from "./componenteFormacionVacios/modificarContenedor.tsx";
 
 
 export default function Home() {
@@ -92,6 +94,22 @@ export default function Home() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-5 rounded w-96">
             <FormularioIngresoCamion />
+          </div>
+        </div>
+      )}
+
+      {tipoFormulario === "reubicarContenedor" &&  (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-5 rounded w-96">
+            <ReubiarContenedor />
+          </div>
+        </div>
+      )}
+
+      {tipoFormulario === "editarNumeroContenedor" &&  (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-5 rounded w-96">
+            <ModificarContenedor />
           </div>
         </div>
       )}

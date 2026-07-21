@@ -6,14 +6,20 @@ type StateGlobalType = {
   filaSeleccionada: string;
   setFilaSeleccionada: (fila: string) => void; // Función para actualizar la fila seleccionada
 
+  numeroDeContenedor:string | undefined;
+  setNumeroDeContenedor: (conte:string | undefined)=>void;
+
+  numeroDePc: number;
+  setNumeroPc:(numPc:number) => void
+
   contenedores: Contenedor[];
   setContenedores: (contenedores: Contenedor[]) => void; // Función para actualizar la lista de contenedores
 
   contenedoresTodos: Contenedor[];
-  setContenedoresTodos: (contenedores: Contenedor[]) => void;
+  setContenedoresTodos: (contenedores: Contenedor[]) => void;  
 
-  tipoFormulario: "camion" | "tren" | "formacionFull" | "formacionVacios" | "infoContenedor" |null;
-  setTipoFormulario: ( tipo: "camion" | "tren" | "formacionFull" | "formacionVacios" | "infoContenedor" | null) => void;
+  tipoFormulario: "camion" | "tren" | "formacionFull" | "formacionVacios" | "infoContenedor" | "reubicarContenedor" | "editarNumeroContenedor" |null;
+  setTipoFormulario: ( tipo: "camion" | "tren" | "formacionFull" | "formacionVacios" | "infoContenedor" | "reubicarContenedor" | "editarNumeroContenedor" | null) => void;
 
   contenedorEditar: Contenedor | null;
   setContenedorEditar: (contenedor: Contenedor | null) => void; // Función para actualizar el contenedor a editar
@@ -40,6 +46,12 @@ export const StateGlobal = create<StateGlobalType>((set) => ({
 
   filaSeleccionada: "",
   setFilaSeleccionada: (fila) => set({ filaSeleccionada: fila, }), // Función para actualizar la fila seleccionada
+
+  numeroDeContenedor: "",
+  setNumeroDeContenedor: (conte) => set({numeroDeContenedor : conte, }),
+
+  numeroDePc:0,
+  setNumeroPc: (numPc) => set({numeroDePc : numPc,}),
 
   contenedores: [], 
   setContenedores: (contenedores) => set({ contenedores,}), // Función para actualizar la lista de contenedores

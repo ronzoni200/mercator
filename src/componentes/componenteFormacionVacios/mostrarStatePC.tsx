@@ -1,7 +1,23 @@
+
 import { StateGlobal } from "../../hookZustand/useStorega";
 
 export default function MostrarPCstate() {
-const{formacionPCvacios, setPCseleccionado, pcSeleccionado } = StateGlobal()
+const{formacionPCvacios, setPCseleccionado, pcSeleccionado, setTipoFormulario, setNumeroDeContenedor, setNumeroPc} = StateGlobal()
+
+const editarPC = (contenedorID : string | undefined,  pc : number)=>{
+  setNumeroDeContenedor(contenedorID)
+   setNumeroPc(pc)
+  console.log('editando')
+  setTipoFormulario("editarNumeroContenedor")
+}
+
+const reubicarContenedor = (contenedorID : string | undefined, pc : number)=>{
+  setNumeroPc(pc)
+  setNumeroDeContenedor(contenedorID)
+  console.log(contenedorID)
+  console.log(pc)
+  setTipoFormulario("reubicarContenedor")
+}
 
 return (
   <div className="flex flex-wrap gap-3">
@@ -57,6 +73,7 @@ return (
             <button
               type="button"
               className="px-4 py-2 rounded bg-orange-600 text-white hover:bg-orange-700 font-semibold whitespace-nowrap"
+              onClick={()=>editarPC(pc.contenedorId , pc.pc)}
             >
               ✏️ Editar
             </button>
@@ -64,6 +81,7 @@ return (
             <button
               type="button"
               className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 font-semibold whitespace-nowrap"
+              onClick={()=>reubicarContenedor(pc.contenedorId, pc.pc)}
             >
               📍 Reubicar
             </button>
